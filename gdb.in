@@ -1,9 +1,17 @@
+# Load and 
 file main.elf
-target remote :3333
+
+# Connect to target
+target remote:3333
+
+# ???
 set $osp = $sp
 set $sp = $sp - 16
+
+# Start
 b main.c:4
 c
+
 call RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE)
 call RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE)
 set ((GPIO_InitTypeDef*)$osp)->GPIO_Pin = GPIO_Pin_3
@@ -29,3 +37,7 @@ call USART_SendData(USART2, 'l')
 call USART_SendData(USART2, 'l')
 call USART_SendData(USART2, 'o')
 call USART_SendData(USART2, '!')
+call USART_SendData(USART2, '\n')
+
+# We are done
+quit
