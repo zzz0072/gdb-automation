@@ -1,6 +1,6 @@
 #!/bin/sh -x
 if [ -z "$1" -o -z "$2" ] ; then
-    echo "usage $0 QEMU_STM32_path"
+    echo "usage $0 QEMU_STM32_path QEMU_LOG_FILE"
     exit
 fi
 

@@ -9,9 +9,10 @@ set $osp = $sp
 set $sp = $sp - 16
 
 # Start
-b main.c:4
+b main.c:6
 c
 
+# Init UART
 call RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE)
 call RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE)
 set ((GPIO_InitTypeDef*)$osp)->GPIO_Pin = GPIO_Pin_3
@@ -31,13 +32,15 @@ set ((USART_InitTypeDef*)$osp)->USART_Mode = USART_Mode_Rx | USART_Mode_Tx
 call USART_Init(USART2, $osp)
 call USART_Cmd(USART2, ENABLE)
 c
-call USART_SendData(USART2, 'H')
-call USART_SendData(USART2, 'e')
-call USART_SendData(USART2, 'l')
-call USART_SendData(USART2, 'l')
-call USART_SendData(USART2, 'o')
-call USART_SendData(USART2, '!')
-call USART_SendData(USART2, '\n')
+
+# Sent and dump string to target
+set variable $str_addr = mystr
+while(*((char *)$str_addr) != '\0')
+    call USART_SendData(USART2, *((char *)$str_addr))
+    append value gdb.log *((char *)$str_addr) 
+
+    set $str_addr = $str_addr + 1
+end
 
 # We are done
 quit

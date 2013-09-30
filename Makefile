@@ -6,7 +6,8 @@ VENDOR=ST
 PLAT=STM32F10x
 CMSIS_LIB=libraries/CMSIS/$(ARCH)
 STM32_LIB=libraries/STM32F10x_StdPeriph_Driver
-LOG_FILE=mylog.txt
+QLOG_FILE=qemu.log
+GLOG_FILE=gdb.log
 
 
 all: main.bin
@@ -42,12 +43,12 @@ qemudbg: main.bin
 		-gdb tcp::3333 -S \
 		-kernel main.bin
 gdbauto: main.bin
-	./start_and_log_qemu.sh $(QEMU_STM32) $(LOG_FILE) &
+	./start_and_log_qemu.sh $(QEMU_STM32) $(QLOG_FILE) &
 	sleep 1
-	$(CROSS_COMPILE)gdb -x gdb.in && ./check_result.sh
+	$(CROSS_COMPILE)gdb -x gdb.in && ./check_result.sh $(QLOG_FILE) $(GLOG_FILE)
 
 emu: main.bin
 	bash emulate.sh main.bin
 
 clean:
-	rm -f *.elf *.bin *.list $(LOG_FILE)
+	rm -f *.elf *.bin *.list $(QLOG_FILE) $(GLOG_FILE)
