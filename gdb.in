@@ -4,7 +4,7 @@ file main.elf
 # Connect to target
 target remote:3333
 
-# ???
+# Prepare memory for function parameters
 set $osp = $sp
 set $sp = $sp - 16
 
