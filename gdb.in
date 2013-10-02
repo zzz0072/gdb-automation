@@ -38,4 +38,5 @@ while(*((char *)$str_addr) != '\0')
 end
 
 # We are done
+detach
 quit
