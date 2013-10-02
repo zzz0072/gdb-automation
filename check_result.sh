@@ -19,4 +19,4 @@ if [ $? != 0 ] ; then
     exit
 fi
 
-echo "String: \n$(cat $1)\nConsists between Qemu and memory."
+echo "String: \n$(cat $1)\nString \"$(cat $1)\" between Qemu and memory are the same.. "
