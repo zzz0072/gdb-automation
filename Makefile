@@ -43,6 +43,7 @@ qemudbg: main.bin
 		-gdb tcp::3333 -S \
 		-kernel main.bin
 gdbauto: main.bin
+	rm -f $(QLOG_FILE) $(GLOG_FILE)
 	./start_and_log_qemu.sh $(QEMU_STM32) $(QLOG_FILE) &
 	sleep 1
 	$(CROSS_COMPILE)gdb -x gdb.in && ./check_result.sh $(QLOG_FILE) $(GLOG_FILE)
