@@ -12,10 +12,10 @@ set $sp = $sp - (sizeof(GPIO_InitTypeDef) * 2) - (sizeof(GPIO_InitTypeDef))
 b main.c:6
 c
 
-# Load/prepare dump file
+# Load/prepare settings
 shell ./check_target_settings.sh
 source .check_target_settings
-if $has_dump_file == 0
+if $has_target_settings == 0
     shell echo "No target settings file..."
 
     # dump GPIO 3
