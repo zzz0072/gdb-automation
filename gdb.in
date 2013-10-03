@@ -18,16 +18,16 @@ source .check_target_settings
 if $has_target_settings == 0
     shell echo "No target settings file..."
 
-    # dump GPIO 3
-    set ((GPIO_InitTypeDef*)$osp)->GPIO_Pin = GPIO_Pin_3
-    set ((GPIO_InitTypeDef*)$osp)->GPIO_Mode = GPIO_Mode_IN_FLOATING
+    # dump GPIO 2
+    set ((GPIO_InitTypeDef*)$osp)->GPIO_Pin = GPIO_Pin_2
+    set ((GPIO_InitTypeDef*)$osp)->GPIO_Speed = GPIO_Speed_50MHz
+    set ((GPIO_InitTypeDef*)$osp)->GPIO_Mode = GPIO_Mode_AF_PP
     dump memory target_settings $osp ($osp + sizeof(GPIO_InitTypeDef))
 
-    # dump GPIO 2
+    # dump GPIO 3
     set $next_osp = $osp + sizeof(GPIO_InitTypeDef)
-    set ((GPIO_InitTypeDef*)$next_osp)->GPIO_Pin = GPIO_Pin_2
-    set ((GPIO_InitTypeDef*)$next_osp)->GPIO_Speed = GPIO_Speed_50MHz
-    set ((GPIO_InitTypeDef*)$next_osp)->GPIO_Mode = GPIO_Mode_AF_PP
+    set ((GPIO_InitTypeDef*)$next_osp)->GPIO_Pin = GPIO_Pin_3
+    set ((GPIO_InitTypeDef*)$next_osp)->GPIO_Mode = GPIO_Mode_IN_FLOATING
     append memory target_settings $next_osp ($next_osp + sizeof(GPIO_InitTypeDef))
 
     # dump USART
