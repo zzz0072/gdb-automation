@@ -52,4 +52,4 @@ emu: main.bin
 	bash emulate.sh main.bin
 
 clean:
-	rm -f *.elf *.bin *.list $(QLOG_FILE) $(GLOG_FILE)
+	rm -f *.elf *.bin *.list $(QLOG_FILE) $(GLOG_FILE) target_settings .check_target_settings
