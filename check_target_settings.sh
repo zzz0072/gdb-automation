@@ -8,4 +8,4 @@ if [ -f "target_settings" ] ; then
     HAS_TARGET_SETTINGS=1
 fi
 
-echo "set variable \$has_target_settings=$HAS_TARGET_SETTINGS" > $RESULT
+echo "set \$has_target_settings=$HAS_TARGET_SETTINGS" > $RESULT

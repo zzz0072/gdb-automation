@@ -54,7 +54,7 @@ call USART_Cmd(USART2, ENABLE)
 c
 
 # Sent and dump string to target
-set variable $str_addr = mystr
+set $str_addr = mystr
 while(*((char *)$str_addr) != '\0')
     call USART_SendData(USART2, *((char *)$str_addr))
     append value gdb.log *((char *)$str_addr) 
